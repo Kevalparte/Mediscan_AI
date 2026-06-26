@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // User profile and nested subcollections (history, reminders, profile, contacts)
+    // Only the authenticated owner can read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /{allPaths=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Global medicines reference list (read-only for authenticated users)
+    match /medicines/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+  }
+}

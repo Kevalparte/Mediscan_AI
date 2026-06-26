@@ -1,0 +1,6 @@
+{
+  "name": "MediScan AI",
+  "description": "Smart Medicine Recognition & Patient Guidance Platform with OCR readers, drug combiner interactions checks, voice output accessibility, dosage reminders and clinical AI chatbots.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
